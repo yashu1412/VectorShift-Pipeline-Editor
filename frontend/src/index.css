@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600&display=swap');
+@import './reactflow-overrides.css';
+
+:root {
+  /* Colors */
+  --bg-0: #050505;          /* app background */
+  --bg-1: #0B0B0C;          /* base panels */
+  --bg-2: #111113;          /* elevated panels */
+  --bg-3: #17171A;          /* hover/active surfaces */
+
+  --text-0: #FFFFFF;        /* primary text */
+  --text-1: #DADADA;        /* secondary text */
+  --text-2: #A6A6A6;        /* tertiary text */
+  --text-3: #6F6F6F;        /* muted */
+
+  --line-0: rgba(255, 255, 255, 0.08); /* hairline borders */
+  --line-1: rgba(255, 255, 255, 0.14);
+
+  --shadow: 0 18px 55px rgba(0, 0, 0, 0.65);
+
+  /* Gradients */
+  --grad-0: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0));
+  --grad-1: linear-gradient(90deg, #FFFFFF 0%, #9A9A9A 30%, #FFFFFF 60%, #6B6B6B 100%);
+  --grad-2: radial-gradient(1200px 700px at 20% -10%, rgba(255, 255, 255, 0.12), transparent 60%);
+
+  /* Status */
+  --ok: #EDEDED;
+  --warn: #BFBFBF;
+  --danger: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-0);
+  color: var(--text-0);
+  background-image: var(--grad-2);
+  background-attachment: fixed;
+  overflow: hidden; /* App-like feel */
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+/* ReactFlow Overrides for Theme */
+.react-flow__node {
+  border-radius: 16px;
+}
+
+.react-flow__handle {
+  width: 12px;
+  height: 12px;
+  background: var(--bg-0);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.react-flow__handle:hover {
+  background: var(--text-0);
+  transform: scale(1.12);
+  transition: all 0.2s;
+}
+
+.react-flow__handle-connecting {
+  background: var(--text-0);
+}
+
+.react-flow__edge-path {
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 2;
+}
+
+.react-flow__connection-path {
+  stroke: var(--text-1);
+  stroke-width: 2;
+}
+
+/* Inputs & Selects Global Styling */
+input, select, textarea {
+  background: var(--bg-1);
+  border: 1px solid var(--line-1);
+  color: var(--text-1);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--text-2);
+  background: var(--bg-0);
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-2);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Keyframe Animations */
+@keyframes slideDownBlur {
+  from { transform: translateY(-10px); opacity: 0; filter: blur(8px); }
+  to { transform: translateY(0); opacity: 1; filter: blur(0); }
+}
+
+@keyframes spawnNode {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(24px); opacity: 0; filter: blur(8px); }
+  to { transform: translateX(0); opacity: 1; filter: blur(0); }
+}
+
+@keyframes popModal {
+  from { transform: translateY(16px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Node Card (Blackglass) */
+.blackglass-node {
+  background: var(--bg-2);
+  border: 1px solid var(--line-0);
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  min-width: 240px;
+  animation: spawnNode 0.16s ease-out forwards;
+}
+
+.blackglass-node:hover,
+.blackglass-node.selected,
+.react-flow__node.selected .blackglass-node {
+  /* Gradient Border Trick */
+  border: 1px solid transparent;
+  background: 
+    linear-gradient(var(--bg-2), var(--bg-2)) padding-box,
+    var(--grad-1) border-box;
+  box-shadow: 0 0 20px -5px rgba(255, 255, 255, 0.15);
+}
+
+.blackglass-node-header {
+  height: 40px; /* Updated per spec */
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-1);
+}
+
+.blackglass-node-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 0; /* Adjust since header has height */
+}
+
+/* Sidebar Node Card */
+.sidebar-node {
+  height: 56px; /* Updated per spec */
+  border-radius: 14px;
+  background: var(--bg-2);
+  border: 1px solid var(--line-0);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  cursor: grab;
+  transition: all 0.2s;
+  color: var(--text-1);
+}
+
+.sidebar-node:hover {
+  border-color: var(--line-1);
+  background: var(--bg-3);
+  transform: translateY(-1px);
+}
+
+
+/* Primary Button */
+.primary-button {
+  height: 40px;
+  border-radius: 8px;
+  background: var(--text-0);
+  color: var(--bg-0);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 0 20px;
+  transition: opacity 0.2s;
+}
+
+.primary-button:hover {
+  opacity: 0.9;
+}
+input, select, textarea {
+  background: var(--bg-0);
+  border: 1px solid var(--line-1);
+  color: var(--text-0);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--text-1);
+  box-shadow: 0 0 0 1px var(--text-1);
+}
+
+label {
+  color: var(--text-2);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
